@@ -15,8 +15,6 @@ namespace ShipmentClculation.Services
     {
         private readonly IMappingService _mappingService;
         private readonly InputValidationService _inputValidationService;
-        private readonly string _dataInputUrl = AppDomain.CurrentDomain.BaseDirectory + @"Input.txt";
-        private readonly string _dataOutputUrl = AppDomain.CurrentDomain.BaseDirectory + @"Output.txt";
 
         public FileService()
         {
@@ -24,11 +22,11 @@ namespace ShipmentClculation.Services
             _inputValidationService = new InputValidationService();
         }
 
-        public IEnumerable<Shipment> Read()
+        public IEnumerable<Shipment> ReadInput(string url)
         {
             var shipments = new List<Shipment>();
 
-            var lines = File.ReadAllLines(_dataInputUrl);
+            var lines = File.ReadAllLines(url);
             foreach (var line in lines)
             {
                 string[] data = line.Split(' ');
@@ -44,12 +42,10 @@ namespace ShipmentClculation.Services
                     shipments.Add(shipment);
                 }
             }
-            var jsonString = File.ReadAllText(_dataInputUrl);
-
             return shipments;
         }
 
-        public void Write(IEnumerable<Shipment> shipments)
+        public void Write(IEnumerable<Shipment> shipments, string url)
         {
             var lines = new List<string>();
             foreach(var shipment in shipments)
@@ -65,7 +61,12 @@ namespace ShipmentClculation.Services
                 }
                 lines.Add(line); 
             }
-            File.WriteAllLines(_dataOutputUrl, lines);
+            File.WriteAllLines(url, lines);
+        }
+
+        public string[] ReadOutput(string url)
+        {
+            return File.ReadAllLines(url);
         }
     }
 }

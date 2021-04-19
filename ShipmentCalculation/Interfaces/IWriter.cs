@@ -9,6 +9,6 @@ namespace ShipmentClculation.Interfaces
     public interface IWriter
     {
         void Write(string data);
-       
+        void Read();
     }
 }

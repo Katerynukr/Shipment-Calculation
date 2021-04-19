@@ -11,8 +11,6 @@ namespace ShipmentClculation.Models
 {
     public class PromotionLargeParcel : PricingRule
     {
-        public decimal Discount { get; set; }
-
         public PromotionLargeParcel(PackageSizes size, CarrierCodes carrierCode)
         {
             GeneratePricing(size, carrierCode);

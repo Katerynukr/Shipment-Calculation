@@ -9,24 +9,22 @@ using System.Threading.Tasks;
 
 namespace ShipmentClculation.Services
 {
-    public class InputValidationService
+    public class InputValidationService : IInputValidationService
     {
-        private readonly IWriter _writer = new ConsoleWriter();
-
         public bool IsInputValid(string[] input)
         {
-            if( IsValidDate(input[0]) &&
+            if (IsValidDate(input[0]) &&
             IsValidPackageSize(input[1]) &&
             IsValidCarrierCode(input[2]))
             {
                 return true;
-            } 
+            }
             else
             {
                 return false;
             }
         }
-        private bool IsValidDate(string dateString)
+        public bool IsValidDate(string dateString)
         {
             try
             {
@@ -35,27 +33,24 @@ namespace ShipmentClculation.Services
             }
             catch (Exception)
             {
-                var s=  dateString;
-                _writer.Write("Date input is not valid");
                 return false;
             }
         }
 
-        private bool IsValidPackageSize(string sizeString)
+        public bool IsValidPackageSize(string sizeString)
         {
             try
             {
-                var size = (PackageSizes) Enum.Parse(typeof(PackageSizes), sizeString);
+                var size = (PackageSizes)Enum.Parse(typeof(PackageSizes), sizeString);
                 return true;
             }
             catch (Exception)
             {
-                _writer.Write("Package size input is not valid");
                 return false;
             }
         }
 
-        private bool IsValidCarrierCode(string codeString)
+        public bool IsValidCarrierCode(string codeString)
         {
             try
             {
@@ -64,7 +59,6 @@ namespace ShipmentClculation.Services
             }
             catch (Exception)
             {
-                _writer.Write("Carrier code input is not valid");
                 return false;
             }
         }

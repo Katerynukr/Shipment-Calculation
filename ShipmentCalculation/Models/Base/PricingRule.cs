@@ -11,6 +11,7 @@ namespace ShipmentClculation.Models.Base
     public abstract class PricingRule
     {
         public decimal Price { get; set; }
+        public decimal? Discount { get; set; }
         public abstract void GeneratePricing(PackageSizes size, CarrierCodes carrierCode);
     }
 }

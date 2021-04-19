@@ -9,6 +9,10 @@ namespace ShipmentClculation.Writers
 {
     public class ConsoleWriter : IWriter
     {
+        public void Read()
+        {
+            Console.Read();
+        }
 
         public void Write(string input)
         {

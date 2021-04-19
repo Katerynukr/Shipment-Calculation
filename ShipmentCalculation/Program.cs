@@ -1,5 +1,6 @@
 ﻿using ShipmentClculation.Interfaces;
 using ShipmentClculation.Services;
+using ShipmentClculation.Writers;
 using System;
 using System.IO;
 
@@ -7,23 +8,24 @@ namespace ShipmentCalculation
 {
     class Program
     {
-        static void Main(string[] args)
+        public static string dataInputUrl = AppDomain.CurrentDomain.BaseDirectory + @"Input.txt";
+        public static string dataOutputUrl = AppDomain.CurrentDomain.BaseDirectory + @"Output.txt";
+        public static void RunCalculation()
         {
-            /*string date = DateTime.Now.ToString();
-            
-            Console.WriteLine(date);
-            Console.ReadLine();*/
-            IFileService service = new FileService();
-            var shipments = service.Read();
-            service.Write(shipments);
-            
-            var lines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + @"Output.txt");
+            IFileService _fileService = new FileService();
+            IWriter _writer = new ConsoleWriter();
+            var shipments = _fileService.ReadInput(dataInputUrl);
+            _fileService.Write(shipments, dataOutputUrl);
+            var lines = _fileService.ReadOutput(dataOutputUrl);
             foreach (var line in lines)
             {
-                Console.WriteLine(line);
+                _writer.Write(line);
             }
-
-            service.Read();
+            _writer.Read();
+        }
+        static void Main(string[] args)
+        {
+            RunCalculation();
         }
     }
 }

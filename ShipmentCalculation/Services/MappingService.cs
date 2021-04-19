@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShipmentClculation.Models.Base;
 
 namespace ShipmentClculation.Services
 {
     public class MappingService : IMappingService
-    {
+    { 
         public ValidShipment MapValidInputToObject(string[] data)
         {
             var date = ParseStringToDate(data[0]);
@@ -29,6 +30,7 @@ namespace ShipmentClculation.Services
         {
             return (PackageSizes)Enum.Parse(typeof(PackageSizes), sizeString);
         }
+
         private CarrierCodes ParseStringToCarrierCode(string codeString)
         {
             return (CarrierCodes)Enum.Parse(typeof(CarrierCodes), codeString);
@@ -47,21 +49,36 @@ namespace ShipmentClculation.Services
         {
             string[] data ={
                 ParseDateToString(shipment.VintDate),
+                ParsePackageSizeToString(shipment.PackageSize),
                 ParseCarrierCodeToString(shipment.CarrierCode),
-                ParsePackageSizeToString(shipment.PackageSize)
+                ParsePriceToString(shipment.Rule),
+                ParseDiscountToString(shipment.Rule)
+
             };
-            
             return string.Join(' ', data);
         }
 
         private string ParseDateToString(DateTime date)
         {
-            return date.ToString();
+            return date.ToString("yyyy-MM-dd");
         }
 
         private string ParseCarrierCodeToString(CarrierCodes code)
         {
             return Enum.GetName(code);
+        }
+
+        private string ParsePriceToString(PricingRule rule)
+        {
+            return rule.Price.ToString();
+        }
+
+        private string ParseDiscountToString(PricingRule rule)
+        {
+            if (rule.Discount != null)
+                return rule.Discount.ToString();
+            else
+                return "-";
         }
 
         private string ParsePackageSizeToString(PackageSizes size)
@@ -71,7 +88,7 @@ namespace ShipmentClculation.Services
 
         public string MapInvalidObjectToString(InvalidShipment shipment)
         {
-            var ignoreMessage = " Ignore";
+            var ignoreMessage = " Ignored";
             var data = shipment.ShipmentData + ignoreMessage;
             return data;
         }

@@ -24,12 +24,6 @@ namespace ShipmentClculation.Models
         {
             var providerPrice = PriceData.ProvidersPrices.FirstOrDefault(p => p.Provider == carrierCode && p.Size == size);
             return providerPrice.Price;
-            /*var lowestPrice = price;
-            foreach (var provider in PriceData.ProvidersPrices)
-            {
-                if (provider.Price < lowestPrice)
-                    lowestPrice = provider.Price;
-            }*/
         }
     }
 }

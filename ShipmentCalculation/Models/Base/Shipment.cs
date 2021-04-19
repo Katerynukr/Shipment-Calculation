@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace ShipmentClculation.Models.Base
 {
     public abstract class Shipment
-    {
-        
+    {  
     }
 }

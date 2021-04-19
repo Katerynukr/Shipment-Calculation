@@ -11,8 +11,6 @@ namespace ShipmentClculation.Models
 {
     public class PromotionSmallParcel : PricingRule
     {
-        public decimal Discount { get; set; }
-
         public PromotionSmallParcel(PackageSizes size, CarrierCodes carrierCode)
         {
             GeneratePricing(size, carrierCode);
@@ -23,7 +21,6 @@ namespace ShipmentClculation.Models
             var regularPrice = GetProviderPrice(size, carrierCode);
             var lowerstPrice = GetLowestPrice(regularPrice);
             var discount = GetPriceDifference(regularPrice, lowerstPrice);
-            //generate discount
             if (DiscountData.DiscountAmount >= discount)
             {
                 Price = lowerstPrice;
@@ -33,16 +30,18 @@ namespace ShipmentClculation.Models
             else
             {
                 discount = DiscountData.DiscountAmount;
-                Price -= discount;
+                Price = regularPrice - discount;
                 Discount = discount;
                 DiscountData.DiscountAmount = 0.0M;
             }
         }
+
         public decimal GetProviderPrice(PackageSizes size, CarrierCodes carrierCode)
         {
             var providerPrice = PriceData.ProvidersPrices.FirstOrDefault(p => p.Provider == carrierCode && p.Size == size);
             return providerPrice.Price;
         }
+
         public decimal GetLowestPrice(decimal regularPrice)
         {
             var lowestPrice = regularPrice;

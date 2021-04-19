@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipmentCalculation", "ShipmentCalculation\ShipmentCalculation.csproj", "{0DCD41C7-D4AC-489D-9677-721504167A8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShipmentCalculationTests", "ShipmentCalculationTests\ShipmentCalculationTests.csproj", "{C1410306-F297-44E2-BC62-B15EB0042559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0DCD41C7-D4AC-489D-9677-721504167A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DCD41C7-D4AC-489D-9677-721504167A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DCD41C7-D4AC-489D-9677-721504167A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1410306-F297-44E2-BC62-B15EB0042559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1410306-F297-44E2-BC62-B15EB0042559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1410306-F297-44E2-BC62-B15EB0042559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1410306-F297-44E2-BC62-B15EB0042559}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
