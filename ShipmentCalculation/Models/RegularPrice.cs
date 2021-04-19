@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ShipmentClculation.Models
 {
-    public class Regular : PricingRule
+    public class RegularPrice : PricingRule
     {
-        public Regular(PackageSizes size, CarrierCodes carrierCode)
+        public RegularPrice(PackageSizes size, CarrierCodes carrierCode)
         {
             GeneratePricing(size, carrierCode);
         }

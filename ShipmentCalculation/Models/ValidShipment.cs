@@ -34,19 +34,19 @@ namespace ShipmentClculation.Models
                     switch (size)
                     {
                         case PackageSizes.S:
-                            Rule = new Regular(size, code);
+                            Rule = new RegularPrice(size, code);
                             break;
                         case PackageSizes.M:
-                            Rule = new Regular(size, code);
+                            Rule = new RegularPrice(size, code);
                             break;
                         case PackageSizes.L:
                             if (DiscountData.LargaParcelCount == 3)
                             {
-                                Rule = new PromotionLargeParcel(size, code);
+                                Rule = new PromotionPriceLargeParcel(size, code);
                             }
                             else
                             {
-                                Rule = new Regular(size, code);
+                                Rule = new RegularPrice(size, code);
                             }
                             DiscountData.LargaParcelCount++;
                             break;
@@ -56,13 +56,13 @@ namespace ShipmentClculation.Models
                     switch (size)
                     {
                         case PackageSizes.S:
-                            Rule = new PromotionSmallParcel(size, code);
+                            Rule = new PromotionPriceSmallParcel(size, code);
                             break;
                         case PackageSizes.M:
-                            Rule = new Regular(size, code);
+                            Rule = new RegularPrice(size, code);
                             break;
                         case PackageSizes.L:
-                            Rule = new Regular(size, code);
+                            Rule = new RegularPrice(size, code);
                             break;
                     }
                     break;

@@ -27,5 +27,25 @@ namespace ShipmentCalculationTests
             result.First().Should().BeOfType<ValidShipment>();
             result.Count().Should().Be(21);
         }
+
+        [Fact]
+        public void ReadOutput_GivenOutputUrl_ReturnsArrayOfString()
+        {
+            string dataOutputUrl = AppDomain.CurrentDomain.BaseDirectory + @"Output.txt";
+            var shipments = new List<Shipment>(){
+                new ValidShipment(new DateTime(2002-12-12), PackageSizes.S, CarrierCodes.LP),
+                new InvalidShipment()
+                {
+                    ShipmentData = "Invalid Shipment"
+                }
+            };
+            var fileService = new FileService();
+            fileService.Write(shipments, dataOutputUrl);
+            var result = fileService.ReadOutput(dataOutputUrl);
+
+            result.Should().NotBeEmpty();
+            result.Count().Should().Be(2);
+            result.First().Should().BeOfType<string>();
+        }
     }
 }
