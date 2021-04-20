@@ -23,16 +23,11 @@ namespace ShipmentClculation.Models
             var discount = GetPriceDifference(regularPrice, lowerstPrice);
             if (DiscountData.DiscountAmount >= discount)
             {
-                Price = lowerstPrice;
-                Discount = discount;
-                DiscountData.DiscountAmount -= discount;
+                SetPricingValuesWithMaxDiscount(lowerstPrice, discount);
             }
             else
             {
-                discount = DiscountData.DiscountAmount;
-                Price = regularPrice - discount;
-                Discount = discount;
-                DiscountData.DiscountAmount = 0.0M;
+                SetPricingValuesWithAvilableDiscount(regularPrice, discount);
             }
         }
 
@@ -57,6 +52,21 @@ namespace ShipmentClculation.Models
         {
             var difference = regularPrice - lowestPrice;
             return difference;
+        }
+
+        private void SetPricingValuesWithMaxDiscount(decimal lowerstPrice, decimal discount)
+        {
+            Price = lowerstPrice;
+            Discount = discount;
+            DiscountData.DiscountAmount -= discount;
+        }
+
+        private void SetPricingValuesWithAvilableDiscount(decimal regularPrice, decimal discount)
+        {
+            discount = DiscountData.DiscountAmount;
+            Price = regularPrice - discount;
+            Discount = discount;
+            DiscountData.DiscountAmount = 0.0M;
         }
     }
 }

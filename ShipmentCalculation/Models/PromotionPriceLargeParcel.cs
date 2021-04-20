@@ -24,18 +24,11 @@ namespace ShipmentClculation.Models
             {
                 if (DiscountData.DiscountAmount >= discount)
                 {
-                    Price = regularPrice - discount;
-                    Discount = discount;
-                    DiscountData.DiscountAmount -= discount;
-                    DiscountData.IsLargeParcelDiscounted = true;
+                    SetPricingValuesWithMaxDiscount(regularPrice, discount);
                 }
                 else
                 {
-                    discount = DiscountData.DiscountAmount;
-                    Price -= discount;
-                    Discount = discount;
-                    DiscountData.DiscountAmount = 0.0M;
-                    DiscountData.IsLargeParcelDiscounted = true;
+                   SetPricingValuesWithAvilableDiscount(regularPrice, discount);
                 }
             }
         }
@@ -43,6 +36,23 @@ namespace ShipmentClculation.Models
         {
             var providerPrice = PriceData.ProvidersPrices.FirstOrDefault(p => p.Provider == carrierCode && p.Size == size);
             return providerPrice.Price;
+        }
+
+        private void SetPricingValuesWithMaxDiscount(decimal regularPrice, decimal discount)
+        {
+            Price = regularPrice - discount;
+            Discount = discount;
+            DiscountData.DiscountAmount -= discount;
+            DiscountData.IsLargeParcelDiscounted = true;
+        }
+
+        private void SetPricingValuesWithAvilableDiscount(decimal regularPrice, decimal discount)
+        {
+            discount = DiscountData.DiscountAmount;
+            Price -= discount;
+            Discount = discount;
+            DiscountData.DiscountAmount = 0.0M;
+            DiscountData.IsLargeParcelDiscounted = true;
         }
     }
 }

@@ -9,8 +9,7 @@ namespace ShipmentClculation.Interfaces
 {
     public interface IFileService
     {
-        IEnumerable<Shipment> ReadInput(string url);
-        void Write(IEnumerable<Shipment> shipments, string url);
-        string[] ReadOutput(string url);
+        string[] Read(string url);
+        void Write(IEnumerable<string> shipmentsLines, string url);
     }
 }
