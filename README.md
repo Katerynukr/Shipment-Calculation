@@ -9,6 +9,7 @@ The application does not use dependency injection, since the main requirement is
 The goal of this project is to practice: 
 - factory design pattern
 - testing (unit tests, fluent assertion)
+- creating extendable code
 - SOLID principles
 - service-oriented architecture
 
